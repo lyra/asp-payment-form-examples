@@ -1,0 +1,78 @@
+.ensureDivHeight {
+    clear: both;
+    margin-bottom: 0;
+    margin-top: 0;
+    visibility: hidden;
+}
+
+#top {
+    height: 160px;
+    width: 996px;
+    font: 12px/1.55em Helvetica, Arial, sans-serif;
+    border-color: #E0DED4 #DDDDD5 #DDDDD5 #DDDDD5;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+}
+
+#logo {
+    float: left;
+    height: 160px;
+    width: 30%;
+
+}
+
+#button {
+    width: 70%;
+    height: 160px;
+    float: left;
+    margin: auto;
+    color: #773306;
+}
+
+.visuel {
+    height: 20px;
+}
+
+#release {
+    width: 996px;
+    color: #727272;
+    font: 12px/1.55em Helvetica, Arial, sans-serif;
+    line-height: 26px;
+    border-color: #E0DED4 #DDDDD5 #DDDDD5 #DDDDD5;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+}
+
+#version {
+    text-align: right;
+}
+
+h2 {
+    color: #91B219;
+}
+
+label {
+    font-weight: bolder;
+    color: #773306;
+}
+
+#footer {
+    color: #773306;
+    font-size: 9px;
+}
+
+#result {
+    width: 70%;
+    height: 160px;
+    float: left;
+    margin: auto;
+    color: #773306;
+    margin-top: 50px;
+}
+
