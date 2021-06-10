@@ -1,25 +1,25 @@
 <% @ Language="VBSCRIPT" CodePage=65001 %>
-<!--#include file="payzen_api.asp"-->
+<!--#include file="lyra_api.asp"-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-fr" lang="fr-fr">
 <head>
-	<title>PAYZEN: Exemple de Formulaire de paiement V2</title>
+	<title>LYRA: Exemple de Formulaire de paiement V2</title>
 	<meta name="Keywords" content="ASP"/> 
 	<meta name="Description" content="Exemple d'implémentation en ASP du Formulaire de paiement V2"/> 
 	<meta name="Author" content="Lyra Network"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<link rel="stylesheet" href="./css/payzen.css" type="text/css" />
+	<link rel="stylesheet" href="./css/lyra.css" type="text/css" />
 </head>
 <body>
 <div id="top">
 	<div id="logo">
-		<img alt="logo_payzen" src="./images/logo_Payzen.png"/>
+		<img alt="logo_lyra" src="./images/logo_Lyra.png"/>
 		<br/>Exemple de Script de paiement en ASP
 	</div >
 
 	<div id="button">
-	<p><b>Lors de votre première utilisation,<br/>n'oubliez pas de modifier l'identifiant de la boutique et le certificat dans le fichier form_V2.asp </b></p>
+	<p><b>Lors de votre première utilisation,<br/>n'oubliez pas de modifier l'identifiant de la boutique et le certificat dans le fichier form.asp </b></p>
 	<br/><br/>
  <%
 Response.CodePage = 65001
@@ -71,8 +71,8 @@ data.Add "vads_order_id", ""
 'Configuration du retour à la boutique' (facultatif)
 '***********************************************************************' 
 data.Add "vads_return_mode", "POST" 'GET | POST'
-data.Add "vads_url_return", "http://localhost:81/payzen/retour_V2.asp"
-'data.Add "vads_url_return", "http://www.monsite.com/payzen/retour_V2.asp"
+data.Add "vads_url_return", "http://localhost:81/lyra/retour.asp"
+'data.Add "vads_url_return", "http://www.monsite.com/lyra/retour.asp"
 'data.Add "vads_url_refused", ""
 'data.Add "vads_url_referral", ""
 'data.Add "vads_url_error", ""

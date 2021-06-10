@@ -7,7 +7,7 @@
 		<h2>Historique des versions</h2>
 		<label>V2.2 <i>07/2012</i></label>
 		<ul>
-			<li>Le fichier vads.asp est remplacé par le fichier payzen_api.asp.</li>
+			<li>Le fichier vads.asp est remplacé par le fichier lyra_api.asp.</li>
 			<li>Amélioration de la gestion des caractères spéciaux (' et ") qui généraient une erreur lors de la construction du formulaire.</li>
 			<li>Ajout des répertoires images et css</li>
 		</ul>
@@ -27,7 +27,7 @@
 		<label>V1 <i>05/2011 - version initiale</i></label>
 		<br/><p>Contenu du pack:</p>
 		<ul> 
-			<li>form_V2.asp : Génération du formulaire de paiement V2 à destination de la plateforme Payzen</li>
+			<li>form_V2.asp : Génération du formulaire de paiement V2 à destination de la plateforme Lyra</li>
 			<li>retour_V2.asp : Analyse de la réponse du paiement. Ce Fichier ne gère que le mode POST (mode URL serveur)</li>
 			<li>vads.asp : Contient les classes utilisées par le script de paiement (notamment la fonction de cryptage sha1)</li>
 		</ul>
