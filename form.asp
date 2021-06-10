@@ -166,8 +166,29 @@ data.Add "signature", Sha1.hash(sign, true) ' encode signature string
 'En cas de problème de signature durant la phase de test, décommentez la ligne suivante pour afficher la signature en clair.
 'response.write (sign)
 
+'***********************************************************************'
+'Gateway URL'
+'***********************************************************************'
+'Décommentez la ligne correspondante au domaine souhaité. Par défaut, c'est le domaine Lyra.
+
+gatewayurl = "https://secure.lyra.com/vads-payment/" 'Lyra Gateway URL'
+'gatewayurl = "https://e-paiement-securite-bici.com/vads-payment/" 'BNPP IRB Gateway URL'
+'gatewayurl = "https://clicandpay.groupecdn.fr/vads-payment/" 'Clic&Pay By groupe Crédit du Nord Gateway URL'
+'gatewayurl = "https://secure.cobroinmediato.tech/vads-payment/" 'Cobro Inmediato Gateway URL'
+'gatewayurl = "https://epaync.nc/vads-payment/" 'EpayNC Gateway URL'
+'gatewayurl = "https://secure.innopay.ch/vads-payment/" 'Innopay Gateway URL'
+'gatewayurl = "https://secure.micuentaweb.pe/vads-payment/" 'Mi Cuenta Web Gateway URL'
+'gatewayurl = "https://secure.osb.pf/vads-payment/" 'OSB Gateway URL'
+'gatewayurl = "https://secure.payty.com/vads-payment/" 'Payty Gateway URL'
+'gatewayurl = "https://secure.payzen.co.in/vads-payment/" 'PayZen In Gateway URL'
+'gatewayurl = "https://secure.payzen.lat/vads-payment/" 'PayZen Lat Gateway URL'
+'gatewayurl = "https://secure.payzen.eu/vads-payment/" 'PayZen Gateway URL'
+'gatewayurl = "https://scelliuspaiement.labanquepostale.fr/vads-payment/" 'Scellius Gateway URL'
+'gatewayurl = "https://sogecommerce.societegenerale.eu/vads-payment/" 'Sogecommerce Gateway URL'
+'gatewayurl = "https://paiement.systempay.fr/vads-payment/" 'Systempay Gateway URL'
+
 %>
-		<form method="post" action="https://secure.payzen.eu/vads-payment/">
+		<form method="post" action="<%=gatewayurl%>">
 			<% For Each key in data %> 
 			<input type="hidden" name="<%=key%>" value="<%=data.Item(key)%>"/>
 			<% Next %>
