@@ -14,7 +14,7 @@
 <body>
 <div id="top">
 	<div id="logo">
-		<img alt="logo_lyra" src="./images/logo_Lyra.png"/>
+		<img alt="LYRA" src="./images/lyra.png"/>
 		<br/>Exemple de Script de paiement en ASP
 	</div >
 
@@ -172,10 +172,9 @@ data.Add "signature", Sha1.hash(sign, true) ' encode signature string
 				</tr>
 				<tr>
 					<td align="center">
-						<img class="visuel" alt="logo_visa.gif" src="images/logo_visa.gif"/>
-						<img class="visuel" alt="logo_cb.gif" src="images/logo_cb.gif"/>					
-						<img class="visuel" alt="logo_mastercard.gif" src="images/logo_mastercard.gif"/>
-						<img class="visuel" alt="e-cartebleue.gif" src="images/e-cartebleue.gif"/>
+						<img class="visuel" alt="VISA" src="images/visa.png"/>
+						<img class="visuel" alt="CB" src="images/cb.png"/>
+						<img class="visuel" alt="MASTERCARD" src="images/mastercard.png"/>
 					</td>
 				</tr>
 			</table>

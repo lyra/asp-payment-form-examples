@@ -14,7 +14,7 @@
 <body>
 <div id="top">
 	<div id="logo">
-		<img alt="logo_lyra" src="./images/logo_Lyra.png"/>
+		<img alt="LYRA" src="./images/lyra.png"/>
 		<br/>Exemple de Script de paiement en ASP
 	</div >
 	<div id="result">
