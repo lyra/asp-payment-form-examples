@@ -16,106 +16,117 @@
 <head>
 	<title>LYRA: Exemple de Formulaire de paiement V2</title>
 	<meta name="Keywords" content="ASP"/> 
-	<meta name="Description" content="Exemple d'implémentation en ASP du Formulaire de paiement V2"/> 
+	<meta name="Description" content="Exemple d'implémentation en ASP du formulaire de paiement V2"/>
 	<meta name="Author" content="Lyra Network"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="/css/lyra.css" type="text/css" />
 </head>
 <body>
 <div id="top">
 	<div id="logo">
 		<img alt="LYRA" src="/images/lyra.png"/>
-		<br/>Exemple de Script de paiement en ASP
-	</div >
+		<br/>Exemple de script de paiement en ASP
+	</div>
 	<div id="result">
 <%
 Response.CodePage = 65001
 Response.CharSet = "utf-8"
-' valeur du certificat'  
-'Ici cette valeur est ecrite en dur mais vous devez la lire depuis votre base de données'
-certif="1111111111111111"
+
+'Certificate value.
+'Valeur du certificat.
+
+'Here the value is written in clear but you have to read it from your database.
+'Ici la valeur est ecrite en dur mais vous devez la lire depuis votre base de données.
+
+certificate = "1111111111111111"
 Session.Contents.RemoveAll()
 
-'-----------------------------------------------------------------------------------' 
-'Calcul de la signature avec les paramètres reçus
-'-----------------------------------------------------------------------------------'
-'Initialisation de la variable 'sign' qui contiendra la signature en clair
+'Computing the signature with the received parameters.
+'Calcul de la signature avec les paramètres reçus.
+
 signature_shop=""
 
-'-----------------------------------------------------------------------------------' 
-'Determination du mode de retour 
-'-----------------------------------------------------------------------------------'
+'Determination of the return mode.
+'Détermination du mode de retour.
+
 IF isEmpty (Request.form("vads_site_id")) THEN
-	'L'appel du fichier est en mode GET (retour à la boutique uniquement)'
-	
-	
+	'The file call is in GET mode (return to the store only).
+	'L'appel du fichier est en mode GET (retour à la boutique uniquement).
+
+	'Loop that builds two arrays:
+	'arrName containing the name of fields starting with 'vads_'.
+	'arrValue containing the values of the 'vads_' parameters.
+
 	'Boucle qui construit deux tableaux:
-	'arrName contenant le nom des champs commencant par 'vads_'
-	'arrValue contenant les valeurs des paramètres 'vads_'
-	j=0
-	For Each i In Request.QueryString 
+	'arrName contenant le nom des champs commencant par 'vads_'.
+	'arrValue contenant les valeurs des paramètres 'vads_'.
+
+	j = 0
+	For Each i In Request.QueryString
 			IF Left(i, 5) = "vads_" THEN
-				
 				redim preserve arrName (j)
 				redim preserve arrValue (j)
-				arrName (j) = i			
+				arrName (j) = i
 				arrValue (j) = Request.QueryString(i)
-				j=j+1			
+				j = j+1
 			end if
 	Next
 ELSE
-	'L'appel du fichier est en mode POST (URL serveur ou retour à la boutique)'
+    'The file call is in POST mode (server URL or return to the store).
+	'L'appel du fichier est en mode POST (URL serveur ou retour à la boutique).
 
-	'Boucle qui construit deux tableaux:
-	'arrName contenant le nom des champs commencant par 'vads_'
-	'arrValue contenant les valeurs des paramètres 'vads_'
+	'Loop that builds two arrays:
+    'arrName containing the name of fields starting with 'vads_'.
+    'arrValue containing the values of the 'vads_' parameters.
 
-	j=0
-	For Each i In Request.form 
+    'Boucle qui construit deux tableaux:
+    'arrName contenant le nom des champs commencant par 'vads_'.
+    'arrValue contenant les valeurs des paramètres 'vads_'.
+
+    j = 0
+	For Each i In Request.form
 			IF Left(i, 5) = "vads_" THEN
-				
 				redim preserve arrName (j)
 				redim preserve arrValue (j)
-				arrName (j) = i			
+				arrName (j) = i
 				arrValue (j) = Request.form(i)
-				j=j+1			
+				j = j+1
 			end if
 	Next
 END IF
 
-'-----------------------------------------------------------------------------------'
-'Construction de la chaîne
-'-----------------------------------------------------------------------------------'
-'concaténation des paramètres 'vads_' avec le séparateur '+' et ajout du certificat en fin de chaine
-signature_shop= Join(BubbleSort(arrName,arrValue),"+") & "+" & certif
+'Concatenation of the 'vads_' parameters with the separator '+' and addition of the certificate at the end of the string.
+'Concaténation des paramètres 'vads_' avec le séparateur '+' et ajout du certificat en fin de chaine.
 
-' En cas de problème de signature durant la phase de test, décommentez la ligne suivante pour afficher la signature en clair.
-'response.write (signature_shop & "<br/>") 		
+signature_shop= Join(BubbleSort(arrName,arrValue),"+") & "+" & certificate
 
-'Appel de la fonction sha1.hash pour encoder la signature
+'If there is a signature problem during the test phase, uncomment the following line to display the signature in clear.
+'En cas de problème de signature durant la phase de test, décommentez la ligne suivante pour afficher la signature en clair.
+
+'response.write (signature_shop & "<br/>")
+
+'Call of sha1.hash function to encode the signature.
+'Appel de la fonction sha1.hash pour encoder la signature.
+
 signature_shop = sha1.hash(signature_shop)
 
-'-----------------------------------------------------------------------------------'
-'Comparaison de la signature reçue et celle calculée'
-'-----------------------------------------------------------------------------------'
- 
+'Comparison of the signature received and the one computed.
+'Comparaison de la signature reçue et celle calculée.
+
 IF Request("signature")= signature_shop THEN
-	' ok traitement de la commande'
-	Response.Write ("Controle Signature ok - Traitement du résultat: <br/>") 
-		'le paiement est-il accepté? '
+	Response.Write ("Controle Signature ok - Traitement du résultat:<br/>")
+		'Le paiement est-il accepté?
 		IF Request("vads_result")= "00" THEN
-			Response.Write ("Votre paiement a été accepté <br/>") 
-		ELSE 
-			Response.Write ("Votre paiement a été refusé (echec autorisation) <br/>")     
+			Response.Write ("Votre paiement a été accepté<br/>")
+		ELSE
+			Response.Write ("Votre paiement a été refusé (echec autorisation)<br/>")  
    		END IF
- 
-ELSE  
-	'nok ne pas traiter la commande risque de fraude'
-	Response.Write ("Controle signature Nok - risque de fraude <br/>Avez-vous bien modifié le certificat dans le fichier retour_V2.asp?") 
-		
-END IF 
+ELSE
+	'Ne pas traiter la commande risque de fraude.
+	Response.Write ("Controle signature Nok - risque de fraude <br/>Avez-vous bien modifié le certificat dans le fichier retour_V2.asp?")
+END IF
 %>
 </div>
 </div>
 </body>
-</html> 
+</html>

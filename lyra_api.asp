@@ -17,7 +17,7 @@
  * Distributed under the BSD License
  * See http://pajhome.org.uk/crypt/md5 for details.
  */
- 
+
 /*
  * Configurable variables. You may need to tweak these to be compatible with
  * the server-side, but the defaults work in most cases.
@@ -89,7 +89,6 @@ function core_sha1(x, len)
     e = safe_add(e, olde);
   }
   return Array(a, b, c, d, e);
-
 }
 
 /*
@@ -229,22 +228,22 @@ var Sha1 = {};  // Sha1 namespace
  */
 Sha1.hash = function(msg, utf8encode) {
   utf8encode =  (typeof utf8encode == 'undefined') ? true : utf8encode;
-  
+
   // convert string to UTF-8, as SHA only deals with byte-streams
   if (utf8encode) msg = Utf8.encode(msg);
-  
+
   // constants [§4.2.1]
   var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
-  
-  // PREPROCESSING 
-  
+
+  // PREPROCESSING
+
   msg += String.fromCharCode(0x80);  // add trailing '1' bit (+ 0's padding) to string [§5.1.1]
-  
+
   // convert string msg into 512-bit/16-integer blocks arrays of ints [§5.2.1]
   var l = msg.length/4 + 2;  // length (in 32-bit integers) of msg + ‘1’ + appended length
   var N = Math.ceil(l/16);   // number of 16-integer-blocks required to hold 'l' ints
   var M = new Array(N);
-  
+
   for (var i=0; i<N; i++) {
     M[i] = new Array(16);
     for (var j=0; j<16; j++) {  // encode 4 chars per integer, big-endian encoding
@@ -257,26 +256,26 @@ Sha1.hash = function(msg, utf8encode) {
   // bitwise-op args to 32 bits, we need to simulate this by arithmetic operators
   M[N-1][14] = ((msg.length-1)*8) / Math.pow(2, 32); M[N-1][14] = Math.floor(M[N-1][14])
   M[N-1][15] = ((msg.length-1)*8) & 0xffffffff;
-  
+
   // set initial hash value [§5.3.1]
   var H0 = 0x67452301;
   var H1 = 0xefcdab89;
   var H2 = 0x98badcfe;
   var H3 = 0x10325476;
   var H4 = 0xc3d2e1f0;
-  
+
   // HASH COMPUTATION [§6.1.2]
-  
+
   var W = new Array(80); var a, b, c, d, e;
   for (var i=0; i<N; i++) {
-  
+
     // 1 - prepare message schedule 'W'
     for (var t=0;  t<16; t++) W[t] = M[i][t];
     for (var t=16; t<80; t++) W[t] = Sha1.ROTL(W[t-3] ^ W[t-8] ^ W[t-14] ^ W[t-16], 1);
-    
+
     // 2 - initialise five working variables a, b, c, d, e with previous hash value
     a = H0; b = H1; c = H2; d = H3; e = H4;
-    
+
     // 3 - main loop
     for (var t=0; t<80; t++) {
       var s = Math.floor(t/20); // seq for blocks of 'f' functions and 'K' constants
@@ -287,23 +286,23 @@ Sha1.hash = function(msg, utf8encode) {
       b = a;
       a = T;
     }
-    
+
     // 4 - compute the new intermediate hash value
     H0 = (H0+a) & 0xffffffff;  // note 'addition modulo 2^32'
-    H1 = (H1+b) & 0xffffffff; 
-    H2 = (H2+c) & 0xffffffff; 
-    H3 = (H3+d) & 0xffffffff; 
+    H1 = (H1+b) & 0xffffffff;
+    H2 = (H2+c) & 0xffffffff;
+    H3 = (H3+d) & 0xffffffff;
     H4 = (H4+e) & 0xffffffff;
   }
 
-  return Sha1.toHexStr(H0) + Sha1.toHexStr(H1) + 
+  return Sha1.toHexStr(H0) + Sha1.toHexStr(H1) +
     Sha1.toHexStr(H2) + Sha1.toHexStr(H3) + Sha1.toHexStr(H4);
 }
 
 //
 // function 'f' [§4.1.1]
 //
-Sha1.f = function(s, x, y, z)  {
+Sha1.f = function(s, x, y, z) {
   switch (s) {
   case 0: return (x & y) ^ (~x & z);           // Ch()
   case 1: return x ^ y ^ z;                    // Parity()
@@ -320,16 +319,15 @@ Sha1.ROTL = function(x, n) {
 }
 
 //
-// hexadecimal representation of a number 
-//   (note toString(16) is implementation-dependant, and  
-//   in IE returns signed numbers when used on full words)
+// hexadecimal representation of a number
+// (note toString(16) is implementation-dependant, and
+// in IE returns signed numbers when used on full words)
 //
 Sha1.toHexStr = function(n) {
   var s="", v;
   for (var i=7; i>=0; i--) { v = (n>>>(i*4)) & 0xf; s += v.toString(16); }
   return s;
 }
-
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 /*  Utf8 class: encode / decode between multi-byte Unicode characters and UTF-8 multiple          */
@@ -339,7 +337,7 @@ Sha1.toHexStr = function(n) {
 var Utf8 = {};  // Utf8 namespace
 
 /**
- * Encode multi-byte Unicode string into utf-8 multiple single-byte characters 
+ * Encode multi-byte Unicode string into utf-8 multiple single-byte characters
  * (BMP / basic multilingual plane only)
  *
  * Chars in range U+0080 - U+07FF are encoded in 2 chars, U+0800 - U+FFFF in 3 chars
@@ -349,18 +347,18 @@ var Utf8 = {};  // Utf8 namespace
  */
 
 Utf8.encode = function(strUni) {
-  // use regular expressions & String.replace callback function for better efficiency 
+  // use regular expressions & String.replace callback function for better efficiency
   // than procedural approaches
   var strUtf = strUni.replace(
       /[\u0080-\u07ff]/g,  // U+0080 - U+07FF => 2 bytes 110yyyyy, 10zzzzzz
-      function(c) { 
+      function(c) {
         var cc = c.charCodeAt(0);
         return String.fromCharCode(0xc0 | cc>>6, 0x80 | cc&0x3f); }
     );
   strUtf = strUtf.replace(
       /[\u0800-\uffff]/g,  // U+0800 - U+FFFF => 3 bytes 1110xxxx, 10yyyyyy, 10zzzzzz
-      function(c) { 
-        var cc = c.charCodeAt(0); 
+      function(c) {
+        var cc = c.charCodeAt(0);
         return String.fromCharCode(0xe0 | cc>>12, 0x80 | cc>>6&0x3F, 0x80 | cc&0x3f); }
     );
   return strUtf;
@@ -372,13 +370,13 @@ Utf8.encode = function(strUni) {
  * @param {String} strUtf UTF-8 string to be decoded back to Unicode
  * @returns {String} decoded string
  */
- 
+
 Utf8.decode = function(strUtf) {
   // note: decode 3-byte chars first as decoded 2-byte strings could appear to be 3-byte char!
   var strUni = strUtf.replace(
       /[\u00e0-\u00ef][\u0080-\u00bf][\u0080-\u00bf]/g,  // 3-byte chars
       function(c) {  // (note parentheses for precence)
-        var cc = ((c.charCodeAt(0)&0x0f)<<12) | ((c.charCodeAt(1)&0x3f)<<6) | ( c.charCodeAt(2)&0x3f); 
+        var cc = ((c.charCodeAt(0)&0x0f)<<12) | ((c.charCodeAt(1)&0x3f)<<6) | ( c.charCodeAt(2)&0x3f);
         return String.fromCharCode(cc); }
     );
   strUni = strUni.replace(
@@ -390,13 +388,12 @@ Utf8.decode = function(strUtf) {
   return strUni;
 }
 
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 /*
  * Function that returns UNIX timestamp of the current date.
  */
-function getCurrentTime(){
+function getCurrentTime() {
 	var date = new Date();
     return date.valueOf();
 }
@@ -406,7 +403,7 @@ function getCurrentTime(){
  */
 function formatDate(timestamp) {
 	var date = new Date(timestamp);
-	
+
 	var str = '';
 	str += padLeft(date.getUTCFullYear(), 4);
 	str += padLeft(date.getUTCMonth() + 1, 2);
@@ -414,7 +411,7 @@ function formatDate(timestamp) {
 	str += padLeft(date.getUTCHours(), 2);
 	str += padLeft(date.getUTCMinutes(), 2);
 	str += padLeft(date.getUTCSeconds(), 2);
-	return str; 
+	return str;
 }
 
 /*
@@ -426,10 +423,10 @@ function generateTransId(timestamp) {
 	curDay.setMilliseconds(0);
 	curDay.setMinutes(0);
 	curDay.setSeconds(0);
-	
+
 	var temp = timestamp - curDay.valueOf(); // number of milliseconds since midnight
 	temp = parseInt(temp / 100);
-	
+
 	return padLeft(temp, 6);
 }
 
@@ -441,7 +438,7 @@ function padLeft(number, length) {
     while (str.length < length) {
 		str = '0' + str;
     }
-	
+
 	return str;
 }
 
@@ -451,9 +448,9 @@ function padLeft(number, length) {
 
 '***********************************************************************
 ' Function for sorting array of value strings according to alphabetical order of their keys
-' arrInt: array of keys 
+' arrInt: array of keys
 ' arrInt2: array of values
-' return an array of sorted values  
+' return an array of sorted values
 '***********************************************************************
 function BubbleSort(arrInt, arrInt2)
 	for i = UBound(arrInt) - 1 To 0 Step -1
@@ -467,8 +464,8 @@ function BubbleSort(arrInt, arrInt2)
 				arrInt2(j) = temp2
 	        end if
 	    next
-	next 
-	
+	next
+
 	BubbleSort = arrInt2
 end function
 
@@ -480,7 +477,7 @@ end function
 function EncodeUTF8(s)
 	dim i
 	dim c
-	
+
 	i = 1
 	do while i <= len(s)
 		c = asc(mid(s, i, 1))
@@ -490,7 +487,7 @@ function EncodeUTF8(s)
 		end if
 		i = i + 1
 	loop
-	
+
 	EncodeUTF8 = s
 end function
 
@@ -503,7 +500,7 @@ function DecodeUTF8(s)
 	dim i
 	dim c
 	dim n
-	
+
 	i = 1
 	do while i <= len(s)
 		c = asc(mid(s, i, 1))
@@ -515,19 +512,19 @@ function DecodeUTF8(s)
 				end if
 				n = n + 1
 			loop
-			
+
 			if n = 2 and ((c and &HE0) = &HC0) then
 				c = asc(mid(s,i+1,1)) + &H40 * (c and &H01)
 			else
 				c = 191
 			end if
-			
+
 			s = left(s,i-1) + chr(c) + mid(s,i+n)
 		end if
-		
+
 		i = i + 1
 	loop
-	
+
 	DecodeUTF8 = s
 end function
 
