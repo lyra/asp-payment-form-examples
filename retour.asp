@@ -1,4 +1,4 @@
-﻿<%--
+<%--
 ' Copyright (C) 2011 - 2021 Lyra Network.
 ' This file is part of Lyra ASP payment form sample.
 ' See COPYING.md for license details.
@@ -8,7 +8,7 @@
 ' @license   http://www.gnu.org/licenses/gpl.html GNU General Public License (GPL v3)
 --%>
 
-<% @ Language="VBSCRIPT" CodePage=65001 %>
+﻿<% @ Language="VBSCRIPT" CodePage=65001 %>
 <!--#include file="lyra_api.asp"-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,12 +19,12 @@
 	<meta name="Description" content="Exemple d'implémentation en ASP du Formulaire de paiement V2"/> 
 	<meta name="Author" content="Lyra Network"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<link rel="stylesheet" href="./css/lyra.css" type="text/css" />
+	<link rel="stylesheet" href="/css/lyra.css" type="text/css" />
 </head>
 <body>
 <div id="top">
 	<div id="logo">
-		<img alt="LYRA" src="./images/lyra.png"/>
+		<img alt="LYRA" src="/images/lyra.png"/>
 		<br/>Exemple de Script de paiement en ASP
 	</div >
 	<div id="result">
