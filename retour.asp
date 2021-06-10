@@ -1,4 +1,14 @@
-﻿<% @ Language="VBSCRIPT" CodePage=65001 %>
+﻿<%--
+' Copyright (C) 2011 - 2021 Lyra Network.
+' This file is part of Lyra ASP payment form sample.
+' See COPYING.md for license details.
+'
+' @author    Lyra Network <https://www.lyra.com>
+' @copyright 2011 - 2021 Lyra Network
+' @license   http://www.gnu.org/licenses/gpl.html GNU General Public License (GPL v3)
+--%>
+
+<% @ Language="VBSCRIPT" CodePage=65001 %>
 <!--#include file="lyra_api.asp"-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

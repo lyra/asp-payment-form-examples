@@ -1,3 +1,13 @@
+<%--
+' Copyright (C) 2011 - 2021 Lyra Network.
+' This file is part of Lyra ASP payment form sample.
+' See COPYING.md for license details.
+'
+' @author    Lyra Network <https://www.lyra.com>
+' @copyright 2011 - 2021 Lyra Network
+' @license   http://www.gnu.org/licenses/gpl.html GNU General Public License (GPL v3)
+--%>
+
 <script language="javascript" type="text/javascript" runat="server">
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
