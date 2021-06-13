@@ -1,3 +1,6 @@
+2.3.0, 2021-06-17:
+- Added HMAC SHA-256 signature algorithm.
+
 2.2.0, 2012-07:
 - Replace vads.asp file with lyra_api.asp file.
 - Improve handling special characters (') and (").

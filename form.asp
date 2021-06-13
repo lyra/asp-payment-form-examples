@@ -15,26 +15,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-fr" lang="fr-fr">
 <head>
 	<title>LYRA: Exemple de Formulaire de paiement V2</title>
-	<meta name="Keywords" content="ASP"/> 
-	<meta name="Description" content="Exemple d'implémentation en ASP du Formulaire de paiement V2"/>
-	<meta name="Author" content="Lyra Network"/>
+	<meta name="Keywords" content="ASP" /> 
+	<meta name="Description" content="Exemple d'implémentation en ASP du Formulaire de paiement V2" />
+	<meta name="Author" content="Lyra Network" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="/css/lyra.css" type="text/css" />
 </head>
 <body>
 <div id="top">
 	<div id="logo">
-		<img alt="LYRA" src="/images/lyra.png"/>
+		<img alt="LYRA" src="/images/lyra.png" />
 		<br/>Exemple de script de paiement en ASP
 	</div>
 
 	<div id="button">
 	<p><b>Lors de votre première utilisation,<br/>n'oubliez pas de modifier l'identifiant de la boutique et le certificat dans le fichier form.asp </b></p>
 	<br/><br/>
- <%
+<%
 Response.CodePage = 65001
 Response.CharSet = "utf-8"
- 
+
 '***********************************************************************'
 'Prepare form data to be posted to payment gateway.
 'Préparation des données du formulaire à poster à la plateforme de paiement.
@@ -161,9 +161,14 @@ sign = "" 'Not encoded signature string.
 For Each key in data
 		data.Item(key) = EncodeUTF8(data.Item(key))
 	Next
+
+'Uncomment the line corresponding to the desired signature algorithm. By default, HMAC-SHA256 is used to compute signature.
+'Décommenter la ligne correspondante à l'algorithme de signature souhaité. Par défaut, HMAC-SHA256 est utilisé pour calculer la signature.
+
 sign = Join(BubbleSort(data.Keys, data.Items), "+") & "+" & certificate 'Test or production certificate.
 
-data.Add "signature", Sha1.hash(sign, true) 'Encode signature string.
+data.Add "signature", Hmacsha256.hash(sign, certificate) 'Encode signature string.
+'data.Add "signature", Sha1.hash(sign, true)
 
 'If there is a signature problem during the test phase, uncomment the following line to display the signature in clear.
 'En cas de problème de signature durant la phase de test, décommentez la ligne suivante pour afficher la signature en clair.
@@ -196,20 +201,20 @@ gatewayurl = "https://secure.lyra.com/vads-payment/" 'Lyra Gateway URL.
 'Créer le formulaire de paiement et rediriger vers la plateforme de paiement.
 %>
 		<form method="post" action="<%=gatewayurl%>">
-			<% For Each key in data %> 
-			<input type="hidden" name="<%=key%>" value="<%=data.Item(key)%>"/>
+			<% For Each key in data %>
+			<input type="hidden" name="<%=key%>" value="<%=data.Item(key)%>" />
 			<% Next %>
-			<table>					
+			<table>
 				<tr>
 					<td>
-						<input type="submit" name="Paiement sécurisé" value="Paiement sécurisé par Carte Bancaire"/>
+						<input type="submit" name="Paiement sécurisé" value="Paiement sécurisé par Carte Bancaire" />
 					</td>
 				</tr>
 				<tr>
 					<td align="center">
-						<img class="visuel" alt="VISA" src="/images/visa.png"/>
-						<img class="visuel" alt="CB" src="/images/cb.png"/>
-						<img class="visuel" alt="MASTERCARD" src="/images/mastercard.png"/>
+						<img class="visuel" alt="VISA" src="/images/visa.png" />
+						<img class="visuel" alt="CB" src="/images/cb.png" />
+						<img class="visuel" alt="MASTERCARD" src="/images/mastercard.png" />
 					</td>
 				</tr>
 			</table>
