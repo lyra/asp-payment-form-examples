@@ -1,12 +1,13 @@
-<%--
-' Copyright (C) 2011 - 2021 Lyra Network.
-' This file is part of Lyra ASP payment form sample.
-' See COPYING.md for license details.
-'
-' @author    Lyra Network <https://www.lyra.com>
-' @copyright 2011 - 2021 Lyra Network
-' @license   http://www.gnu.org/licenses/gpl.html GNU General Public License (GPL v3)
---%>
+<!--
+/**
+ * Copyright © Lyra Network.
+ * This file is part of Lyra ASP payment form example. See COPYING.md for license details.
+ *
+ * @author    Lyra Network <https://www.lyra.com>
+ * @copyright Lyra Network
+ * @license   http://www.gnu.org/licenses/gpl.html GNU General Public License (GPL v3)
+ */
+-->
 
 <% @ Language="VBSCRIPT" CodePage=65001 %>
 <!--#include file="lyra_api.asp"-->
@@ -88,8 +89,8 @@ data.Add "vads_payment_config", "SINGLE" 'Payment type : SINGLE | MULTI | MULTI_
 'Retour à la boutique.
 
 data.Add "vads_return_mode", "POST" 'GET | POST.
-data.Add "vads_url_return", "http://localhost:81/lyra/retour.asp"
-'data.Add "vads_url_return", "http://www.monsite.com/lyra/retour.asp"
+data.Add "vads_url_return", "http://localhost/lyra/return.asp"
+'data.Add "vads_url_return", "http://www.monsite.com/lyra/return.asp"
 'data.Add "vads_url_refused", ""
 'data.Add "vads_url_referral", ""
 'data.Add "vads_url_error", ""
