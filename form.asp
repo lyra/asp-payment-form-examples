@@ -20,7 +20,7 @@
 	<meta name="Description" content="Exemple d'implémentation en ASP du Formulaire de paiement V2" />
 	<meta name="Author" content="Lyra Network" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="/css/lyra.css" type="text/css" />
+	<link rel="stylesheet" href="./css/lyra.css" type="text/css" />
 </head>
 <body>
 <div id="top">
@@ -213,9 +213,9 @@ gatewayurl = "https://secure.lyra.com/vads-payment/" 'Lyra Gateway URL.
 				</tr>
 				<tr>
 					<td align="center">
-						<img class="visuel" alt="VISA" src="/images/visa.png" />
-						<img class="visuel" alt="CB" src="/images/cb.png" />
-						<img class="visuel" alt="MASTERCARD" src="/images/mastercard.png" />
+						<img class="visuel" alt="VISA" src="./images/visa.png" />
+						<img class="visuel" alt="CB" src="./images/cb.png" />
+						<img class="visuel" alt="MASTERCARD" src="./images/mastercard.png" />
 					</td>
 				</tr>
 			</table>

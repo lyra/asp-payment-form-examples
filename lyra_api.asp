@@ -218,20 +218,24 @@ function binb2b64(binarray)
     return str;
 }
 
+function initializeStr(str) {
+    return new Uint8Array([unescape(encodeURIComponent(str))].map(function(c) { return c.charCodeAt(0); }));
+}
+
+var Hmacsha256 = {}; // HMAC Sha-256 namespace.
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 /*  HMAC SHA-256 implementation in JavaScript                                                     */
 /*   - see https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API                        */
 /*         https://github.com/danharper/hmac-examples                                             */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-async function Hmacsha256.hash(key, msg) {
-    const g = str => new Uint8Array([...unescape(encodeURIComponent(str))].map(c => c.charCodeAt(0))),
-    k = g(key),
-    m = g(message),
-    c = await crypto.subtle.importKey('raw', k, { name: 'HMAC', hash: 'SHA-256' },true, ['sign']),
-    s = await crypto.subtle.sign('HMAC', c, m);
-    [...new Uint8Array(s)].map(b => b.toString(16).padStart(2, '0')).join('');
-
-    return btoa(String.fromCharCode(...new Uint8Array(s)))
+Hmacsha256.hash = function(key, msg) {
+    k = initializeStr(key),
+    m = initializeStr(msg),
+    c = crypto.subtle.importKey('raw', k, {name: 'HMAC', hash: 'SHA-256'}, true, ['sign']),
+    s = crypto.subtle.sign('HMAC', c, m);
+    [new Uint8Array(s)].map(function(b) { return b.toString(16).padStart(2, '0') }).join('');
+    return btoa(String.fromCharCode(new Uint8Array(s)));
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */

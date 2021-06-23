@@ -20,12 +20,12 @@
 	<meta name="Description" content="Exemple d'implémentation en ASP du formulaire de paiement V2" />
 	<meta name="Author" content="Lyra Network" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="/css/lyra.css" type="text/css" />
+	<link rel="stylesheet" href="./css/lyra.css" type="text/css" />
 </head>
 <body>
 <div id="top">
 	<div id="logo">
-		<img alt="LYRA" src="/images/lyra.png" />
+		<img alt="LYRA" src="./images/lyra.png" />
 		<br/>Exemple de script de paiement en ASP
 	</div>
 	<div id="result">
