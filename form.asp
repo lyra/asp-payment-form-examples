@@ -34,8 +34,8 @@
     </div>
 
     <div id="main">
-        <p><b>When using for the first time, do not forget to modify the shop ID and the key inside form.asp file.</b></p>
-        <p><b>Lors de votre première utilisation, n'oubliez pas de modifier l'identifiant de la boutique et la clé dans le fichier form.asp.</b></p>
+        <p><b>When using for the first time, do not forget to modify the shop ID and the SHA key inside form.asp file.</b></p>
+        <p><b>Lors de votre première utilisation, n'oubliez pas de modifier l'identifiant de la boutique et la clé SHA dans le fichier form.asp.</b></p>
         <br /><br />
 <%
 Response.CodePage = 65001
@@ -52,7 +52,7 @@ Set data = createObject("Scripting.Dictionary")
 'Les champs obligatoires.
 
 data.Add "vads_site_id", "12345678" 'Store identifier. IMPORTANT: Do not forget to modifiy this field.
-key = "1111111111111111" 'PRODUCTION or TEST SHA key. IMPORTANT: Do not forget to modifiy this field.
+shakey = "1111111111111111" 'PRODUCTION or TEST SHA key. IMPORTANT: Do not forget to modifiy this field.
 
 data.Add "vads_version", "V2" 'Payment form version: V2 is the only possible value.
 data.Add "vads_contrib", "ASP_Form_Examples_v2.3.0"
@@ -94,7 +94,7 @@ data.Add "vads_payment_config", "SINGLE" 'Payment type : SINGLE, MULTI, MULTI_EX
 'Retour à la boutique.
 
 data.Add "vads_return_mode", "POST" 'GET, POST.
-data.Add "vads_url_return", "http://www.monsite.com/lyra/return.asp"
+data.Add "vads_url_return", "http://www.monsite.com/return.asp"
 'data.Add "vads_url_refused", ""
 'data.Add "vads_url_referral", ""
 'data.Add "vads_url_error", ""
@@ -167,18 +167,18 @@ For Each key in data
     data.Item(key) = EncodeUTF8(data.Item(key))
 Next
 
-'Uncomment the line corresponding to the desired signature algorithm. By default, HMAC-SHA256 is used to compute signature.
-'Décommenter la ligne correspondante à l'algorithme de signature souhaité. Par défaut, HMAC-SHA256 est utilisé pour calculer la signature.
-
-sign = Join(BubbleSort(data.Keys, data.Items), "+") & "+" & key 'Test or production key.
-
-data.Add "signature", Hash.hmacSha256(sign, key) 'Encode signature string in HMAC-SHA256. Recommended.
-'data.Add "signature", Hash.sha1(sign) 'Encode signature string in SHA1.
+sign = Join(BubbleSort(data.Keys, data.Items), "+") & "+" & shakey 'Test or production key.
 
 'If there is a signature problem during the test phase, uncomment the following line to display the signature in clear.
 'En cas de problème de signature durant la phase de test, décommentez la ligne suivante pour afficher la signature en clair.
 
 'response.write(sign)
+
+'Uncomment the line corresponding to the desired signature algorithm. By default, HMAC-SHA256 is used to compute signature.
+'Décommenter la ligne correspondante à l'algorithme de signature souhaité. Par défaut, HMAC-SHA256 est utilisé pour calculer la signature.
+
+data.Add "signature", Hash.hmacSha256(sign, shakey) 'Encode signature string in HMAC-SHA256. Recommended.
+'data.Add "signature", Hash.sha1(sign) 'Encode signature string in SHA1.
 
 'Gateway URL. Uncomment the line corresponding to the desired domain.
 'URL de la plateforme de paiement. Décommenter la ligne correspondante au domaine souhaité.
