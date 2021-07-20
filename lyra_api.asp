@@ -23,25 +23,11 @@
 
 var Hash = {}; // Hash namespace.
 
-Hash.hmacSha256 = function(msg, key, utf8Encode) {
-    utf8encode = (typeof utf8Encode == 'undefined') ? true : utf8Encode;
-
-    // Convert string to UTF-8, as SHA only deals with byte-streams.
-    if (utf8Encode) {
-        msg = msg.toString(CryptoJS.enc.Utf8);
-    }
-
+Hash.hmacSha256 = function(msg, key) {
     return CryptoJS.HmacSHA256(msg, key).toString(CryptoJS.enc.Base64);
 };
 
-Hash.sha1 = function(msg, utf8Encode) {
-    utf8encode = (typeof utf8Encode == 'undefined') ? true : utf8Encode;
-
-    // Convert string to UTF-8, as SHA only deals with byte-streams.
-    if (utf8Encode) {
-        msg = msg.toString(CryptoJS.enc.Utf8);
-    }
-
+Hash.sha1 = function(msg) {
     return CryptoJS.SHA1(msg);
 }
 
