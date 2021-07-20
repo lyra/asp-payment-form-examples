@@ -1,4 +1,4 @@
-1.3.0, 2021-06-17:
+1.3.0, 2021-06-20:
 - Added HMAC-SHA-256 signature algorithm.
 - Replace the library used to manage hash algorithms.
 - Manage different domains URLs.

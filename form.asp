@@ -55,7 +55,7 @@ data.Add "vads_site_id", "12345678" 'Store identifier. IMPORTANT: Do not forget 
 shakey = "1111111111111111" 'PRODUCTION or TEST SHA key. IMPORTANT: Do not forget to modifiy this field.
 
 data.Add "vads_version", "V2" 'Payment form version: V2 is the only possible value.
-data.Add "vads_contrib", "ASP_Form_Examples_v2.3.0"
+data.Add "vads_contrib", "ASP_Form_Examples_1.3.0"
 data.Add "vads_ctx_mode", "TEST" 'Context mode : TEST, PRODUCTION.
 
 'Get current UNIX time stamp.
