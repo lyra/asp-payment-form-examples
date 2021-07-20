@@ -5,8 +5,7 @@
     visibility: hidden;
 }
 
-#top {
-    height: 160px;
+#content {
     width: 996px;
     font: 12px/1.55em Helvetica, Arial, sans-serif;
     border-color: #E0DED4 #DDDDD5 #DDDDD5 #DDDDD5;
@@ -15,20 +14,31 @@
     margin-left: auto;
     margin-right: auto;
     padding: 25px;
+    text-align: center;
 }
 
 #logo {
-    float: left;
-    height: 160px;
-    width: 30%;
+    height: 130px;
 }
 
-#button {
+#logo img {
+    vertical-align: middle;
+}
+
+#logo div {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+#main {
     width: 70%;
-    height: 160px;
-    float: left;
     margin: auto;
     color: #773306;
+}
+
+#main form table {
+    width: 100%;
 }
 
 .visuel {
@@ -53,7 +63,7 @@
 }
 
 h2 {
-    color: #91B219;
+    color: #3775ba;
 }
 
 label {
