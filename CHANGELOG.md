@@ -1,12 +1,15 @@
-1.4.0, 2021-06-17:
+1.3.0, 2021-06-17:
 - Added HMAC-SHA-256 signature algorithm.
+- Replace the library used to manage hash algorithms.
+- Manage different domains URLs.
+- Some display improvements.
 
-1.3.0, 2012-07-01:
+1.2.0, 2012-07-01:
 - Replace vads.asp file with lyra_api.asp file.
 - Improve handling special characters (') and (").
-- Added images and css directories.
+- Added images and CSS directories.
 
-1.2.0, 2012-02-01:
+1.1.1, 2012-02-01:
 - Updated return file.
 
 1.1.0, 2012-01-01:
