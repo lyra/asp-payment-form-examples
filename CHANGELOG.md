@@ -1,3 +1,6 @@
+1.3.1, 2022-10-21:
+- Update some logos.
+
 1.3.0, 2021-06-20:
 - Added HMAC-SHA-256 signature algorithm.
 - Replace the library used to manage hash algorithms.
